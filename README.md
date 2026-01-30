@@ -1,3 +1,32 @@
+# Procedure
+1. load modules using `module load xx`:
+  1) CCconfig               8) pmix/4.2.4              15) scipy-stack/2025a (math)  22) libaec/1.0.6         29) arpack-ng/3.9.1  (math)  36) eccodes/2.31.0      (geo)   43) libspatialindex/1.9.3 (phys)
+  2) gentoo/2023      (S)   9) ucc/1.2.0               16) ipykernel/2025a           23) nco/5.1.7    (io)    30) armadillo/12.6.4 (math)  37) cfitsio/4.3.0       (vis)   44) antlr/2.7.7
+  3) gcccore/.12.3    (H)  10) openmpi/4.1.5   (m)     17) mpi4py/4.0.3      (t)     24) geos/3.12.0  (geo)   31) brunsli/0.1              38) jasper/4.0.0        (vis)   45) libdap/3.20.11
+  4) gcc/12.3         (t)  11) flexiblas/3.3.1         18) hdf5/1.14.2       (io)    25) proj/9.2.0   (geo)   32) qhull/2020.2     (math)  39) libgeotiff/1.7.1            46) gsl/2.7               (math)
+  5) hwloc/2.9.1           12) imkl/2023.2.0   (math)  19) netcdf/4.9.2      (io)    26) hdf/4.2.16   (io)    33) lerc/4.0.0               40) librttopo/1.1.0             47) llvm/16.0.6           (t)
+  6) ucx/1.14.1            13) StdEnv/2023     (S)     20) udunits/2.2.28    (t)     27) boost/1.82.0 (t)     34) postgresql/16.0  (t)     41) freexl/2.0.0        (t)     48) mii/1.1.2
+  7) libfabric/1.18.0      14) python/3.11.5   (t)     21) perl/5.36.1       (t)     28) eigen/3.4.0  (math)  35) gdal/3.9.1       (geo)   42) libspatialite/5.1.0 (phys)
+
+2. Missing Pillow. `module spider pillow`, copy its version and replace the version in requirements.txt.
+
+3. `pip install cffi msgpack findlibs`
+4. `module save cwarhm` and `module restore cwarhm`
+5. Edit 2a_clone_mizuroute.sh. Original `git clone --single-branch  --branch develop "$github_url" "$mizu_path"` replace with `git clone --single-branch --branch main "$github_url" "$mizu_path"`.
+Original `git pull upstream develop` replace with `git pull upstream main`.
+6. Edit 0_control_files/control_file.sh replace the source of mizuRoute with https://github.com/ESCOMP/mizuRoute.
+
+7. If a broken directory exists from earlier attempts, clean it first: `rm -rf /home/zhentao/projects/rrg-h294liu/zhentao/CWARHM/CWARHM_data/installs/mizuRoute
+`, then run `sh 2a_clone_mizuroute.sh`
+
+8. When compiling mizuRoute, the system cannot find libraries/parallelio.  
+ cd CWARHM/CWARHM_data/installs/mizuRoute/
+ mkdir -p libraries/parallelio
+./bin/git-fleximod -g .gitmodules update
+
+9. 
+
+
 # Community Workflows to Advance Reproducibility in Hydrologic Modeling (CWARHM)
 This is the code repository that accompanies the paper _"Community Workflows to Advance Reproducibility in Hydrologic Modeling: Separating model-agnostic and model-specific configuration steps in applications of large-domain hydrologic models"_ (Knoben et al., 2022).
 
