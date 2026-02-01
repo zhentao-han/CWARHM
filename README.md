@@ -24,7 +24,9 @@ Original `git pull upstream develop` replace with `git pull upstream main`.
  mkdir -p libraries/parallelio
 ./bin/git-fleximod -g .gitmodules update
 
-9. 
+9. module load StdEnv/2023 gcc/12.3 openmpi/4.1.5
+10. module load netcdf/4.9.2 netcdf-fortran/4.6.1
+
 
 
 # Community Workflows to Advance Reproducibility in Hydrologic Modeling (CWARHM)
