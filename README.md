@@ -21,27 +21,26 @@ Original `git pull upstream develop` replace with `git pull upstream main`.
 `, then run `sh 2a_clone_mizuroute.sh`
 
 8. When compiling mizuRoute, the system cannot find libraries/parallelio.  
- cd CWARHM/CWARHM_data/installs/mizuRoute/
- mkdir -p libraries/parallelio
-./bin/git-fleximod -g .gitmodules update
+ `cd CWARHM/CWARHM_data/installs/mizuRoute/`
+ `mkdir -p libraries/parallelio`
+`./bin/git-fleximod -g .gitmodules update`
 
 9. Go to route/build subdirectory:
 
-cd route/build
-export BLDDIR=`pwd`/../
+`cd route/build`
+`export BLDDIR=`pwd`/../`
 
 Get NCDF_C_PATH and PNETCDF_PATH
 
-module load pnetcdf (if not loaded)
-module load netcdf-fortran (if not loaded)
-nc-config --prefix
-pnetcdf-config --prefix
+`module load pnetcdf` (if not loaded)
+`module load netcdf-fortran` (if not loaded)
+`nc-config --prefix`
+`pnetcdf-config --prefix`
 
-export NCDF_C_PATH= output of `nc-config --prefix`
-export PNETCDF_PATH= output of `pnetcdf-config --prefix`
+`export NCDF_C_PATH= output of nc-config --prefix`
+`export PNETCDF_PATH= output of pnetcdf-config --prefix`
 
-
-gmake FC=gnu FC_EXE=mpif90 F_MASTER=$BLDDIR NCDF_PATH=$EBROOTNETCDFMINFORTRAN NCDF_C_PATH=$NCDF_C_PATH PNETCDF_PATH=$PNETCDF_PATH EXE=route_runoff.exe
+`gmake FC=gnu FC_EXE=mpif90 F_MASTER=$BLDDIR NCDF_PATH=$EBROOTNETCDFMINFORTRAN NCDF_C_PATH=$NCDF_C_PATH PNETCDF_PATH=$PNETCDF_PATH EXE=route_runoff.exe`
 
 
 
