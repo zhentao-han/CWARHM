@@ -6,7 +6,8 @@
   4) gcc/12.3         (t)  11) flexiblas/3.3.1         18) hdf5/1.14.2       (io)    25) proj/9.2.0   (geo)   32) qhull/2020.2     (math)  39) libgeotiff/1.7.1            46) gsl/2.7               (math)
   5) hwloc/2.9.1           12) imkl/2023.2.0   (math)  19) netcdf/4.9.2      (io)    26) hdf/4.2.16   (io)    33) lerc/4.0.0               40) librttopo/1.1.0             47) llvm/16.0.6           (t)
   6) ucx/1.14.1            13) StdEnv/2023     (S)     20) udunits/2.2.28    (t)     27) boost/1.82.0 (t)     34) postgresql/16.0  (t)     41) freexl/2.0.0        (t)     48) mii/1.1.2
-  7) libfabric/1.18.0      14) python/3.11.5   (t)     21) perl/5.36.1       (t)     28) eigen/3.4.0  (math)  35) gdal/3.9.1       (geo)   42) libspatialite/5.1.0 (phys)
+  7) libfabric/1.18.0      14) python/3.11.5   (t)     21) perl/5.36.1       (t)     28) eigen/3.4.0  (math)  35) gdal/3.9.1       (geo)   42) libspatialite/5.1.0 (phys)  49) netcdf-fortran/4.6.1 (io)
+    																																								       50) pnetcdf
 
 2. Missing Pillow. `module spider pillow`, copy its version and replace the version in requirements.txt.
 
@@ -24,8 +25,23 @@ Original `git pull upstream develop` replace with `git pull upstream main`.
  mkdir -p libraries/parallelio
 ./bin/git-fleximod -g .gitmodules update
 
-9. module load StdEnv/2023 gcc/12.3 openmpi/4.1.5
-10. module load netcdf/4.9.2 netcdf-fortran/4.6.1
+9. Go to route/build subdirectory:
+
+cd route/build
+export BLDDIR=`pwd`/../
+
+Get NCDF_C_PATH and PNETCDF_PATH
+
+module load pnetcdf (if not loaded)
+module load netcdf-fortran (if not loaded)
+nc-config --prefix
+pnetcdf-config --prefix
+
+export NCDF_C_PATH= output of `nc-config --prefix`
+export PNETCDF_PATH= output of `pnetcdf-config --prefix`
+
+
+gmake FC=gnu FC_EXE=mpif90 F_MASTER=$BLDDIR NCDF_PATH=$EBROOTNETCDFMINFORTRAN NCDF_C_PATH=$NCDF_C_PATH PNETCDF_PATH=$PNETCDF_PATH EXE=route_runoff.exe
 
 
 
