@@ -20,9 +20,12 @@ Original `git pull upstream develop` replace with `git pull upstream main`.
 7. If a broken directory exists from earlier attempts, clean it first: `rm -rf /home/zhentao/projects/rrg-h294liu/zhentao/CWARHM/CWARHM_data/installs/mizuRoute
 `, then run `sh 2a_clone_mizuroute.sh`
 
-8. When compiling mizuRoute, the system cannot find libraries/parallelio.  
+8. When compiling mizuRoute, the system cannot find libraries/parallelio.
+   
  `cd CWARHM/CWARHM_data/installs/mizuRoute/`
+
  `mkdir -p libraries/parallelio`
+ 
 `./bin/git-fleximod -g .gitmodules update`
 
 9. Go to route/build subdirectory:
