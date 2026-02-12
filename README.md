@@ -46,6 +46,29 @@ Get NCDF_C_PATH and PNETCDF_PATH
 `gmake FC=gnu FC_EXE=mpif90 F_MASTER=$BLDDIR NCDF_PATH=$EBROOTNETCDFMINFORTRAN NCDF_C_PATH=$NCDF_C_PATH PNETCDF_PATH=$PNETCDF_PATH EXE=route_runoff.exe`
 
 
+10. NetCDF file merge forcing data
+
+Replace all 'name' in the ERA5_surface_and_pressure_level_combiner.py with 'valid_name'.
+
+Command line:
+`for f in ERA5_surface_*.nc; do
+    file "$f" | grep -q Zip || continue
+    tmp=$(mktemp -d)
+    unzip -qq "$f" -d "$tmp"
+
+    instant=$(find "$tmp" -name "*instant*.nc" | head -n 1)
+
+    if [ -n "$instant" ]; then
+        echo "$f -> $(basename "$instant")"
+        mv "$instant" "$f"
+    else
+        echo "ERROR: no instant file in $f"
+    fi
+
+    rm -r "$tmp"
+done`
+
+
 
 # Community Workflows to Advance Reproducibility in Hydrologic Modeling (CWARHM)
 This is the code repository that accompanies the paper _"Community Workflows to Advance Reproducibility in Hydrologic Modeling: Separating model-agnostic and model-specific configuration steps in applications of large-domain hydrologic models"_ (Knoben et al., 2022).
