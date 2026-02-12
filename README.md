@@ -51,7 +51,8 @@ Get NCDF_C_PATH and PNETCDF_PATH
 Replace all 'name' in the ERA5_surface_and_pressure_level_combiner.py with 'valid_name'.
 
 Command line:
-`for f in ERA5_surface_*.nc; do
+`
+for f in ERA5_surface_*.nc; do
     file "$f" | grep -q Zip || continue
     tmp=$(mktemp -d)
     unzip -qq "$f" -d "$tmp"
@@ -66,7 +67,8 @@ Command line:
     fi
 
     rm -r "$tmp"
-done`
+done
+`
 
 
 
