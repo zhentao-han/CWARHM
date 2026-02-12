@@ -50,7 +50,7 @@ Get NCDF_C_PATH and PNETCDF_PATH
 
 Replace all 'name' in the ERA5_surface_and_pressure_level_combiner.py with 'valid_name'.
 
-Command line:
+Command line for unzip .nc:
 ```
 for f in ERA5_surface_*.nc; do
     file "$f" | grep -q Zip || continue
@@ -69,7 +69,8 @@ for f in ERA5_surface_*.nc; do
     rm -r "$tmp"
 done
 ```
-
+11. MERIT_Hydro DEM download: 
+https://global-hydrodynamics.github.io/MERIT_Hydro/
 
 
 # Community Workflows to Advance Reproducibility in Hydrologic Modeling (CWARHM)
